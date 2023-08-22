@@ -1,0 +1,12 @@
+h1{
+    text-align: center;
+    text-decoration: underline;
+}
+.mat-grid-tile img{
+    width: 220px;
+    height: 200px;
+}
+.mat-grid-tile img:hover{
+    border-radius: 60px;
+    transition: 0.6s;
+}

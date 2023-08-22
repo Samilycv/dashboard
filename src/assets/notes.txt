@@ -1,0 +1,228 @@
+            
+
+                    CONTACT MANAGEMENT SYSTE
+              ---------------------------------------
+
+            1. Create a new project - ng new dashboard
+            2. Run the new project - ng s -o
+            3. Clear the code in app.component.html
+            4. Install Angular material - ng add @angular/material
+                    ->Install -  ng add @angular/material
+            ->Configure material - 
+            In style.css - @import '../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+            Add Button from material
+                    import api in app.module.ts - import {MatButtonModule} from '@angular/material/button';
+                   
+                    import[
+                        MatButtonModule
+                    ]
+
+            5. Create html pages or components    
+                    ->header- ng g c header
+                    ->footer- ng g c footer
+                    ->sideBar- ng g c sideBar
+                    ->mainContent- ng g c mainContent
+                main content
+                    ->Card- ng g c card
+                    ->areaChart- ng g c areaChart
+                    ->table- ng g c table
+                    ->pieChart- ng g c pieChart
+
+
+            6. Setup path for each component - Routing
+                        localhost:4200 -> localhost:4200/contactManager
+                    Inside app-routing.module.ts file
+                        const routes: Routes = [
+                                { //localhost:4200 -> localhost:4200/contactManager
+                                        path:'',redirectTo:'contactManager',pathMatch:'full'
+                                },
+                                { //listing all contacts details
+                                        path:'contactManager',component:ContactManagerComponent
+                                },
+                              
+                        ];
+                        then while hovering the  component:ContactManagerComponent....click on fix then it will automatically fix the import 
+                        like this ...import { ContactManagerComponent } from './contact-manager/contact-manager.component';
+                        
+            7. <router-outlet></router-outlet>
+                -Page to view requested components.
+            8. Design full pages
+            9. API Integration
+                To fetch data and didplay
+                   ->Create a server folder
+                   ->Inside it, Create db.json file
+                   ->Goto jsonplaceholder - my json data - content  
+
+                   ->Create a package.json file - npm init          
+                   Update package.json as 
+                   ->"start": "json-server --watch db.json --port 3000"
+                   ->Install npm i json-server
+                   ->Run backend - npm start
+
+           10. Create Model
+                ->Create a model folder in src
+                ->Inside in it, create myContact.ts file and myGroup.ts file
+
+           11. Asynchronous Resolving
+                        JS              TS
+                     Promise         Observable (rxjs - reactive extension javascript) library
+                     .then()         .subscribe()
+                     .catch()        .catch()
+
+                display all Contact information API - get
+                View all Contact information API - get
+                Update all Contact information API - put
+                delete all Contact information API -delete
+
+           12. Create service
+           SERVICES - Pass data from one component to another component 
+                        If different components share the same data then-
+                        we use to create a service
+           ng g s service-name -> ng g s services/api
+
+           13. To Get http methods for api fetching
+                ->Import HttpClientModule in app.module.ts
+
+                import {HttpClientModule} from '@angular/common/http';
+
+                import[
+                        HttpClientModule
+                ]
+           14. Dependency Injection
+                Data share between two dependent classes
+                ->It performs inside the constructor
+                Constructor -> Is a special member function
+                            -> It executes first in the class
+                
+                Syntax for DI -> constructor(access-specifier variable-name : class-name){}
+
+           15. ngOnInit
+                -> It is a lifecycle hook
+                -> Starting stage of a component creation
+
+           16. Data Binding - Data sharing inside a component (ts,html)
+                1. One way Data Binding(ts->html or html to ts)
+                    i)Component to view (ts->html)
+                        1)String Interpolation - {{variable-name}} (inside in html)
+                        2)Property Binding - [attribute-name] = "property-name"
+                   ii)View to component (html to ts)
+                        1)Event binding - (event-name)="function-name"
+
+                        Events
+                        ->events are "things" that happen to HTML elements.
+                        ->An HTML web page has finished loading
+                        ->An HTML input field was changed
+                        ->An HTML button was clicked
+                        ->onchange - An HTML element has been changed
+                        ->onclick - The user clicks an HTML element
+
+                        2)Event binding using $event
+                        ->$event is used in function argument
+                        ->(event-name)="function-name($event)" (html)
+                        ->function-name(event) (ts)
+
+                2. Two way Data Binding
+                         ->ngModel - [(ngModel)]="property-name"
+                              -ngModel imports in app.module.ts - FormsModule
+                              -Creates a FormControl instance from a domain model 
+                              and binds it to a form control element.
+                              -add this into input tag also put name attribute in it
+
+
+           17. Directives - To manipulate DOM 
+                1)Component Directives
+                2)Structural Directives
+
+                        ->*ngIf="condition"
+
+                        ->*ngFor="let var-name of array-name"
+           18. ActivatedRoute (CLASS)
+                -> Provides access to information about a route associated with a component that is loaded in an outlet. 
+                ->Use to traverse the RouterState tree and extract information from nodes.
+
+           ->Parameters
+                -params:An observable of the matrix parameters scoped to this route.
+
+           19. Transforming Data Using Pipes
+                ->Pipes are simple functions to use in template expressions 
+                        to accept an input value and return a transformed value.
+                ->Angular provides built-in pipes for typical data transformations,
+                eg:DatePipe - Formats a date value according to locale rules.
+                   UpperCasePipe - Transforms text to all upper case.
+                -> Create a pipe - ng g p pipes/filter
+
+           20. Router (class)
+                    A service that provides navigation among views 
+                    and URL manipulation capabilities.
+               -navigateByUrl()
+                    Navigates to a view using an absolute route path
+           
+           21. Decorator
+               ->An Angular Decorator is a function, using which we attach 
+               metadata to a class declaration, method, accessor, property, 
+               or parameter.
+               We use it to decorate components, directives,
+               Angular Modules, etc.
+               ->Class decorators
+                         @NgModule
+                         @Component
+                         @Injectable
+                         @Directive
+                         @Pipe
+               ->Property Decorators
+                         @Input
+                         @Output
+                         @ContentChild & @ContentChildren
+                         @ViewChild & @ViewChildren
+                         @HostBinding
+               ->Method decorators
+                         @HostListener
+               ->Parameter decorators
+                         @Inject
+                         @Host
+                         @Self
+                         @SkipSelf
+                         @Optional
+               ->Custom Decorators
+           22. Parent-Child Communication (components)
+               1) Child to Parent Communication
+                    ->Output Decorator - @Output
+                       child - header
+                       parent - app component
+               ->@Output
+               Output decorates the property as the output property.
+               We initialize it as an EventEmitter.
+               The child component raises the event and passes the data as the argument to the event.
+               The parent component listens to events using event binding and reads the data.
+
+               1)Parent to child communication
+               ->Input
+               Input decorator marks the property as the input property. 
+               I.e it can receive data from the parent component. 
+               The parent component uses the property binding to bind it to a component property.
+               Whenever the value in the parent component changes 
+               angular updates the value in the child component.
+           
+           23. Directives
+               The Angular directive helps us to manipulate the DOM. 
+               You can change a DOM element’s appearance, behavior, or 
+               layout using the directives. 
+
+               Types of directives
+               i) Component directives
+               ii) Structural directives
+                    ->ngFor
+                    ->ngSwitch
+                    ->ngIf
+               iii) Attribute directives
+                    ->ngModel
+                    ->ngClass
+                         Th ngClass is used to add or remove the CSS classes from an HTML element.
+                         Using the ngClass one can create dynamic styles in HTML pages.
+                    ->ngStyle
+           24.highcharts
+               site - https://www.highcharts.com/
+               Install - npm install highcharts-angular --save
+           
+           material icons https://fonts.google.com/icons
